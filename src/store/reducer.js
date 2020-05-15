@@ -1,7 +1,11 @@
 // src/store/reducer.js
 const initialState = {
     user: {
-      name: "Helva"
+      name: "Helva",
+      favorites: [
+        67283,
+        357311,
+      ]
     },
     pizzas: [
       {
@@ -30,6 +34,27 @@ const initialState = {
   
   export default function reducer(state = initialState, action) {
     switch (action.type) {
+      case "TOGGLE_FAVORITE_PIZZA": {
+        if (state.user.favorites.includes(action.payload)) {
+          const newfavorites = state.user.favorites.filter(favoritePizza => favoritePizza !== action.payload)
+          console.log("newfav?", newfavorites)
+          return {
+            ...state, 
+            user: {
+              ...state.user,
+              favorites: newfavorites
+            }
+          }
+        } else {
+          return {
+            ...state,
+            user: {
+              ...state.user,
+              favorites:[...state.user.favorites, action.payload]
+            }  
+          }
+        }
+      }
       case "ADD_PIZZA": {
         // => Ask yourself: what is action.payload?
         return {
