@@ -29,12 +29,14 @@ export default function PizzaList() {
   const dispatch = useDispatch()
 
 
+
   console.log("pizza???", pizzas)
   console.log("fav?", favoritePizza)
   console.log("fav2?", user.favorites)
 
   const pizzaList = pizzas.map((pizza) => {
     const { id, name, description, bought } = pizza;
+    const renderFavoritePizza = pizza.isFavorite ? <>❤︎</> : <>♡</>;
     return (
       <ul key={id}>
         <p>
@@ -46,7 +48,7 @@ export default function PizzaList() {
                 payload: pizza.id
               })
             }}> 
-              ♡
+              {renderFavoritePizza}
             </button>
           </b>
         </p>
